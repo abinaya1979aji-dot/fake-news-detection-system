@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detection System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="icon">📰</div>
+        <h1>Fake News Detection System</h1>
+        <p>AI-powered news classification using TF-IDF and Logistic Regression</p>
+    </header>
+
+    <main class="card">
+
+        <form method="POST">
+            <label for="news">Enter News Article or Headline</label>
+
+            <textarea
+                id="news"
+                name="news"
+                placeholder="Paste a news article or headline here..."
+                required
+            >{{ news }}</textarea>
+
+            <div class="buttons">
+                <button type="submit">🔍 Check News</button>
+                <button type="button" class="clear" onclick="clearText()">Clear</button>
+            </div>
+        </form>
+
+        {% if prediction %}
+        <section class="result {% if prediction == 'REAL NEWS' %}real{% else %}fake{% endif %}">
+            <div class="result-icon">
+                {% if prediction == "REAL NEWS" %}✓{% else %}!{% endif %}
+            </div>
+
+            <div>
+                <h2>{{ prediction }}</h2>
+                <p>Model confidence: <strong>{{ "%.2f"|format(confidence) }}%</strong></p>
+            </div>
+        </section>
+        {% endif %}
+
+        <section class="stats">
+            <div class="stat">
+                <span>Model</span>
+                <strong>Logistic Regression</strong>
+            </div>
+            <div class="stat">
+                <span>Features</span>
+                <strong>TF-IDF</strong>
+            </div>
+            <div class="stat">
+                <span>Test Accuracy</span>
+                <strong>{{ "%.2f"|format(accuracy) }}%</strong>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Fake News Detection Mini Project</p>
+        <p class="note">Prediction is based on patterns learned from the training dataset and is not a substitute for independent fact-checking.</p>
+    </footer>
+
+</div>
+
+<script>
+function clearText() {
+    document.getElementById("news").value = "";
+}
+</script>
+
+</body>
+</html>
