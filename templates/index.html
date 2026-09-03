@@ -1,0 +1,19 @@
+📰
+Fake News Detection System
+AI-powered news classification using TF-IDF and Logistic Regression
+
+Enter News Article or Headline 
+{{ news }}
+🔍 Check News Clear
+{% if prediction %}
+{% if prediction == "REAL NEWS" %}✓{% else %}!{% endif %}
+{{ prediction }}
+Model confidence: {{ "%.2f"|format(confidence) }}%
+
+{% endif %}
+Model Logistic Regression
+Features TF-IDF
+Test Accuracy {{ "%.2f"|format(accuracy) }}%
+Fake News Detection Mini Project
+
+Prediction is based on patterns learned from the training dataset and is not a substitute for independent fact-checking.
